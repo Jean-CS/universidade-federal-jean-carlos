@@ -26,9 +26,14 @@ function university_styles() {
     wp_enqueue_style('university_main_styles', get_stylesheet_uri(), NULL, microtime());
 }
 
+function university_features() {
+    add_theme_support('title-tag');
+}
+
 /* wp function
  1st argument: what type of instruction for wp
  2nd argument: your function */
 add_action('wp_enqueue_scripts', 'university_files');
+add_action('after_setup_theme', 'university_features');
 
 ?>
