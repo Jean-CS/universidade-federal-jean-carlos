@@ -4,4 +4,6 @@
 INSERT INTO `wp_term_relationships` VALUES
 (1,1,0),
 (5,1,0),
-(7,1,0);
+(7,1,0),
+(34,2,0),
+(35,2,0);
