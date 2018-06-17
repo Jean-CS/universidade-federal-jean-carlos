@@ -56,6 +56,8 @@ while(have_posts()) {
             wp_list_pages(array(
               'title_li' => NULL,
               'child_of' => $findChildrenOf,
+              // Order by menu order on ADMIN
+              'sort_column' => 'menu_order'
             ));
           ?>
         </ul>
