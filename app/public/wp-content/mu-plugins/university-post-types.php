@@ -2,6 +2,8 @@
 
 function university_post_types() {
     register_post_type('event', array(
+        'rewrite' => array('slug' => 'events'), // So the url "/events" works instead of '/event' 
+        'has_archive' => true, //  Required for wp to display list of events
         'public' => true, // Makes post_type public to viewers/admins of the site
         'labels' => array(
             'name' => 'Events', // Changes the label on the wp-admin
