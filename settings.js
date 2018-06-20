@@ -1,4 +1,4 @@
-exports.themeLocation = './public/wp-content/themes/fictionaltheme/';
+exports.themeLocation = './app/public/wp-content/themes/fictionaltheme/';
 exports.urlToPreview = 'http://universidade-federal-de-jean-carlos.local/';
 
 // ORIGINAL
