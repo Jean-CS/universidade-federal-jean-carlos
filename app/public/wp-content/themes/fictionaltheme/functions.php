@@ -30,10 +30,21 @@ function university_features() {
     add_theme_support('title-tag');
 }
 
+function university_post_types() {
+    register_post_type('events', array(
+        'public' => true,
+        'labels' => array(
+            'name' => 'Events'
+        )
+    ));
+}
+
 /* wp function
  1st argument: what type of instruction for wp
  2nd argument: your function */
 add_action('wp_enqueue_scripts', 'university_files');
 add_action('after_setup_theme', 'university_features');
+
+add_action('init', 'university_post_types');
 
 ?>
