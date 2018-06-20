@@ -1,7 +1,7 @@
 <?php 
 
 function university_post_types() {
-    register_post_type('events', array(
+    register_post_type('event', array(
         'public' => true, // Makes post_type public to viewers/admins of the site
         'labels' => array(
             'name' => 'Events', // Changes the label on the wp-admin
