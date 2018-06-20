@@ -11,7 +11,7 @@ function university_scripts() {
     // arg3: has any dependency?
     // arg4: version number -> set to current time for Caching purposes
     // arg5: load right before closing </body> tag?
-    wp_enqueue_script('main-javascript', get_theme_file_uri('/js/scripts-bundledjs'), NULL, microtime(), true);
+    wp_enqueue_script('main-javascript', get_theme_file_uri('/js/scripts-bundled.js'), NULL, microtime(), true);
 }
 
 function university_styles() {
