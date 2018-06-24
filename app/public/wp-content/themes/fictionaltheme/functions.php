@@ -30,10 +30,30 @@ function university_features() {
     add_theme_support('title-tag');
 }
 
+function university_adjust_queries($query) {
+    // Only if on the front-end website AND on the page of 'events' AND is the default URL based query (not a custom query)
+    if (!is_admin() && is_post_type_archive('event') AND $query->is_main_query()) {
+        $today = date('Ymd');
+        
+        $query->set('meta_key', 'event_date');
+        $query->set('orderby', 'meta_value_num');
+        $query->set('order', 'ASC');
+        $query->set('meta_query', array( // Only show posts that the 'event_date' is greater or equal to Today
+            array( 
+              'key' => 'event_date',
+              'compare' => '>=',
+              'value' => $today,
+              'type' => 'numeric' // The type of the values we are comparing
+            )
+            ));
+    }
+}
+
 /* wp function
  1st argument: what type of instruction for wp
  2nd argument: your function */
 add_action('wp_enqueue_scripts', 'university_files');
 add_action('after_setup_theme', 'university_features');
-
+// Right before wp runs the query to get the posts, adjust it to our liking
+add_action('pre_get_posts', 'university_adjust_queries');
 ?>
