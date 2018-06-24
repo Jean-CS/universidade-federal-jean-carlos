@@ -3,9 +3,9 @@
   <div class="page-banner">
     <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg') ?>);"></div>
     <div class="page-banner__content container container--narrow">
-      <h1 class="page-banner__title">All Events</h1>
+      <h1 class="page-banner__title">Past Events</h1>
       <div class="page-banner__intro">
-        <p>See what is going on in our world.</p>
+        <p>Recap of our past events.</p>
       </div>
     </div>  
   </div>
@@ -13,8 +13,26 @@
   <div class="container container--narrow page-section">
 
     <?php 
-      while(have_posts()) {
-        the_post(); 
+        $today = date('Ymd');
+        $pastEvents = new WP_Query(array(
+            'paged' => get_query_var('paged', 1), // get paged url, if there is none then its the initial page, so the 1 is a fallback
+            'post_type' => 'event',
+            'meta_key' => 'event_date',
+            'order_by' => 'meta_value_num', // post_date ; title ; rand
+            'order' => 'ASC',
+            'meta_query' => array( // Only show posts that the 'event_date' is greater or equal to Today
+                array( 
+                'key' => 'event_date',
+                'compare' => '<',
+                'value' => $today,
+                'type' => 'numeric' // The type of the values we are comparing
+                )
+            ) 
+        ));
+
+      while($pastEvents->have_posts()) {
+        $pastEvents->the_post();
+
         // Gets the custom_field 'event_date'. Created with the plugin "Advanced Custom Fields"
         // function get_field() is part of the plugin
         $eventDate = new DateTime(get_field('event_date'));
@@ -32,12 +50,10 @@
 
     <?php
         } 
-        echo paginate_links();
+        echo paginate_links(array(
+            'total' => $pastEvents->max_num_pages
+        ));
     ?>
-    
-    <hr class="section-break">
-
-    <p>Looking for a recap of past events? <a href="<?php echo site_url('/past-events') ?>">Check out our past events archive.</a></p>
 
   </div>
 
