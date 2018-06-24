@@ -16,14 +16,26 @@
           <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
           
           <?php 
+            $today = date('Ymd');
             $homepageEvents = new WP_Query(array(
               'posts_per_page' => 2,
-              'post_type' => 'event'
+              'post_type' => 'event',
+              'meta_key' => 'event_date',
+              'order_by' => 'meta_value_num', // post_date ; title ; rand
+              'order' => 'ASC',
+              'meta_query' => array( // Only show posts that the 'event_date' is greater or equal to Today
+                array( 
+                  'key' => 'event_date',
+                  'compare' => '>=',
+                  'value' => $today,
+                  'type' => 'numeric' // The type of the values we are comparing
+                )
+              ) 
             ));
 
             while($homepageEvents->have_posts()) {
               $homepageEvents->the_post(); 
-              
+
               // Gets the custom_field 'event_date'. Created with the plugin "Advanced Custom Fields"
               // function get_field() is part of the plugin
               $eventDate = new DateTime(get_field('event_date'));
