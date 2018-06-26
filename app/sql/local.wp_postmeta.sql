@@ -149,4 +149,15 @@ INSERT INTO `wp_postmeta` VALUES
 (151,51,"_edit_last","1"),
 (152,51,"_edit_lock","1529469016:1"),
 (153,52,"_edit_last","1"),
-(154,52,"_edit_lock","1529636277:1");
+(154,52,"_edit_lock","1529812584:1"),
+(155,55,"_edit_last","1"),
+(156,55,"field_5b2ef400a4dbe","a:11:{s:3:\"key\";s:19:\"field_5b2ef400a4dbe\";s:5:\"label\";s:10:\"Event Date\";s:4:\"name\";s:10:\"event_date\";s:4:\"type\";s:11:\"date_picker\";s:12:\"instructions\";s:0:\"\";s:8:\"required\";s:1:\"1\";s:11:\"date_format\";s:6:\"yymmdd\";s:14:\"display_format\";s:8:\"dd/mm/yy\";s:9:\"first_day\";s:1:\"0\";s:17:\"conditional_logic\";a:3:{s:6:\"status\";s:1:\"0\";s:5:\"rules\";a:1:{i:0;a:2:{s:5:\"field\";s:4:\"null\";s:8:\"operator\";s:2:\"==\";}}s:8:\"allorany\";s:3:\"all\";}s:8:\"order_no\";i:0;}"),
+(157,55,"rule","a:5:{s:5:\"param\";s:9:\"post_type\";s:8:\"operator\";s:2:\"==\";s:5:\"value\";s:5:\"event\";s:8:\"order_no\";i:0;s:8:\"group_no\";i:0;}"),
+(158,55,"position","normal"),
+(159,55,"layout","no_box"),
+(160,55,"hide_on_screen",""),
+(161,55,"_edit_lock","1529803769:1"),
+(162,52,"event_date","20180630"),
+(163,52,"_event_date","field_5b2ef400a4dbe"),
+(164,56,"_edit_last","1"),
+(165,56,"_edit_lock","1529815437:1");
