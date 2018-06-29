@@ -28,6 +28,7 @@
 
 	function university_features() {
 		add_theme_support('title-tag');
+		add_theme_support('post-thumbnails');
 	}
 
 	function university_adjust_queries($query) {
