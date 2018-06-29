@@ -29,6 +29,8 @@
 	function university_features() {
 		add_theme_support('title-tag');
 		add_theme_support('post-thumbnails');
+		add_image_size('professorLandscape', 480, 220, true);
+		add_image_size('professorPortrait', 220, 480, true);
 	}
 
 	function university_adjust_queries($query) {
@@ -61,6 +63,6 @@
 	 2nd argument: your function */
 	add_action('wp_enqueue_scripts', 'university_files');
 	add_action('after_setup_theme', 'university_features');
-// Right before wp runs the query to get the posts, adjust it to our liking
+	// Right before wp runs the query to get the posts, adjust it to our liking
 	add_action('pre_get_posts', 'university_adjust_queries');
 ?>
