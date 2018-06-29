@@ -1,6 +1,6 @@
 <?php get_header();
 
-	while ( have_posts() ) {
+	while ( have_posts() ) :
 		the_post(); ?>
 
 		<div class="page-banner">
@@ -41,25 +41,28 @@
 						),
 					),
 				) );
+			?>
+			<?php if ( $relatedProfessors->have_posts() ) : ?>
+					<hr class="section-break">
+					<h2 class="headline headline--medium"><?php get_the_title(); ?> Professors</h2>
+					
+					<ul class="professor-cards">
+						<?php while ( $relatedProfessors->have_posts() ) :
+								$relatedProfessors->the_post(); ?>
 
-				if ( $relatedProfessors->have_posts() ) {
-					echo '<hr class="section-break">';
-					echo '<h2 class="headline headline--medium">' . get_the_title() . ' Professors</h2>';
-					echo '<ul class="professor-cards">';
+								<li class="professor-card__list-item">
+									<a class="professor-card" href="<?php the_permalink(); ?>">
+										<img src="<?php the_post_thumbnail_url(); ?>" alt="" class="professor-card__image">
+										<span class="professor-card__name"><?php the_title(); ?></span>
+									</a>
+								</li>
 
-					while ( $relatedProfessors->have_posts() ) {
-						$relatedProfessors->the_post();
-						?>
-						<li class="professor-card__list-item">
-							<a class="professor-card" href="<?php the_permalink(); ?>">
-								<img src="<?php the_post_thumbnail_url(); ?>" alt="" class="professor-card__image">
-								<span class="professor-card__name"><?php the_title(); ?></span>
-							</a>
-						</li>
-					<?php }
-					echo '</ul>';
-				}
+						<?php endwhile; ?> 
+					</ul>
 
+			<?php endif; ?>
+
+			<?php
 				// resets the context of the global object to the default url object
 				wp_reset_postdata();
 
@@ -84,44 +87,46 @@
 						),
 					),
 				) );
-
-				if ( $relatedEvents->have_posts() ) {
-					echo '<hr class="section-break">';
-					echo '<h2 class="headline headline--medium">Upcoming ' . get_the_title() . ' Events</h2>';
-
-					while ( $relatedEvents->have_posts() ) {
-						$relatedEvents->the_post();
-
-						// Gets the custom_field 'event_date'. Created with the plugin "Advanced Custom Fields"
-						// function get_field() is part of the plugin
-						$eventDate = new DateTime( get_field( 'event_date' ) );
-						?>
-						<div class="event-summary">
-							<a class="event-summary__date t-center" href="<?php the_permalink(); ?>">
-								<span class="event-summary__month"><?php echo $eventDate->format( 'M' ); ?></span>
-								<span class="event-summary__day"><?php echo $eventDate->format( 'd' ); ?></span>
-							</a>
-							<div class="event-summary__content">
-								<h5 class="event-summary__title headline headline--tiny"><a
-											href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-								<p>
-									<?php
-										if ( has_excerpt() ) {
-											echo get_the_excerpt();
-										} else {
-											echo wp_trim_words( get_the_content(), 18 );
-										}
-									?>
-									<a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a>
-								</p>
-							</div>
-						</div>
-					<?php }
-				}
 			?>
+			<?php if ( $relatedEvents->have_posts() ) : ?>
+					<hr class="section-break">
+					<h2 class="headline headline--medium">Upcoming <?php get_the_title(); ?> Events</h2>
+
+					<?php while ( $relatedEvents->have_posts() ) :
+							$relatedEvents->the_post();
+
+							// Gets the custom_field 'event_date'. Created with the plugin "Advanced Custom Fields"
+							// function get_field() is part of the plugin
+							$eventDate = new DateTime( get_field( 'event_date' ) ); ?>
+
+							<div class="event-summary">
+								<a class="event-summary__date t-center" href="<?php the_permalink(); ?>">
+									<span class="event-summary__month"><?php echo $eventDate->format( 'M' ); ?></span>
+									<span class="event-summary__day"><?php echo $eventDate->format( 'd' ); ?></span>
+								</a>
+								<div class="event-summary__content">
+									<h5 class="event-summary__title headline headline--tiny">
+										<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+									</h5>
+									<p>
+										<?php
+											if ( has_excerpt() ) {
+												echo get_the_excerpt();
+											} else {
+												echo wp_trim_words( get_the_content(), 18 );
+											}
+										?>
+										<a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a>
+									</p>
+								</div>
+							</div>
+
+					<?php endwhile; ?>
+
+			<?php endif; ?>
 
 		</div>
 
-	<?php } ?>
+	<?php endwhile; ?>
 
 <?php get_footer(); ?>
